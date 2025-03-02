@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <PackageId>UVM.SDK</PackageId>
+    <Authors>Alexandre DA CUNHA--GUIBORAT</Authors>
+    <Company>TBD</Company>
+    <Description>A package containing all UVM packages.</Description>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PackageReference Include="UVM.Interface" Version="1.0.0" />
+    <PackageReference Include="UVM.Engine" Version="1.0.0" />
+    <PackageReference Include="UVM.Service" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>
