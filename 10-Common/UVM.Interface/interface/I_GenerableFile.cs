@@ -16,7 +16,7 @@ namespace UVM.Interface
         #region Constructor
         // TBD
         #endregion Constructor
-
+        
         #region Properties
         // TBD
         #endregion Properties
@@ -52,7 +52,7 @@ namespace UVM.Interface
         #region Constructor
         // TBD
         #endregion Constructor
-
+        
         #region Properties
         // TBD
         #endregion Properties

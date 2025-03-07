@@ -58,7 +58,7 @@ namespace UVM.Logging
         #region Constructor
         // TBD
         #endregion Constructor
-
+          
         #region Properties
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace UVM.Logging
         #endregion Public
 
         #region Protected
-
+          
         #region Constructor
         // TBD
         #endregion Constructor
