@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <PackageId>UVM.Service</PackageId>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <Authors>Alexandre DA CUNHA--GUIBORAT</Authors>
+    <Company>TBD</Company>
+    <Description>A package with services such as git tools, and configuration for UVM.</Description>
+
+    <IsNuGet>true</IsNuGet>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PackageReference Include="UVM.Interface" Version="1.0.0" />
+    <PackageReference Include="UVM.Logging" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <ProjectReference Include="..\..\10-Common\UVM.Logging\UVM.Logging.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LibGit2Sharp" Version="0.31.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>UVM.Testing</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+</Project>

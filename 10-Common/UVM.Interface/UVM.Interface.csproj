@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <PackageId>UVM.Interface</PackageId>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <Authors>Alexandre DA CUNHA--GUIBORAT</Authors>
+    <Company>TBD</Company>
+    <Description>A package with interfaces, enumerations and constantes used by UVM.</Description>
+
+    <IsNuGet>true</IsNuGet>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>UVM.Testing</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+</Project>
