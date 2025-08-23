@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using UVM.Interface;
+using System.Reflection;
+using UVM.Interface.Enums;
 
 namespace UVM.Service
 {
@@ -9,35 +10,48 @@ namespace UVM.Service
     /// </summary>
     public class UVMConfiguration
     {
-        #region DEBUG
-
-        /// <summary>
-        /// String representation of the assembly.
-        /// </summary>
-        private const string _asmName = "UVM.Service";
-
-        /// <summary>
-        /// String representation of the class.
-        /// </summary>
-        private const string _className = "UVMConfiguration";
-
-        #endregion DEBUG
+        #region Singleton
+        // TBD
+        #endregion Singleton
 
         #region Public
 
-        #region Constructor
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="String"/> representation of the absolute path to the git Directory to consider when running UVM. (Positionally organized)
+        /// </summary>
+        public List<String> GitDirectories { get; private set; } = [];
+
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="String"/> representation of the commit Id we want to compare. (Positionally organized)
+        /// </summary>
+        public List<String> CommitIds { get; private set; } = [];
+
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="String"/> representation of the commit Id we want to compare to. (Positionally organized)
+        /// </summary>
+        public List<String> CommitIdsRef { get; private set; } = [];
+
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="BuildType"/> used to manage the project. (Positionally organized)
+        /// </summary>
+        public List<BuildType> BuildModes { get; private set; } = [];
+
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="DigitType"/> to modify when managing the project. (Positionally organized)
+        /// </summary>
+        public List<DigitType> DigitModes { get; private set; } = [];
 
         /// <summary>
         /// UVMConfiguration constructor.
         /// Notes : 
-        /// All list must be the same length and Positionnaly organized, i.e gitDirPaths[i] => commitIdsRef[i] => ...
+        /// All <see cref="List{T}"/> must be the same length and Positionally organized, i.e gitDirPaths[i] => commitIdsRef[i] => ...
         /// </summary>
-        /// <param name="gitDirPaths">List of string representating the absolute path to all git directories to consider. (Positionnaly organized)</param>
-        /// <param name="commitIdsRef">List of string representating the commits' id we want to compare to. (Positionnaly organized)</param>
-        /// <param name="commitIds">List of string representating the commits' id we want to compare. (Positionnaly organized)</param>
-        /// <param name="buildModes">List of <see cref="BuildType"/> to use for when managing versions. (Positionnaly organized)</param>
-        /// <param name="digitModes">List of <see cref="DigitType"/> to modify when managing versions. (Positionnaly organized)</param>
-        public UVMConfiguration(List<string> gitDirPaths, List<string> commitIdsRef, List<string> commitIds, List<BuildType> buildModes, List<DigitType> digitModes)
+        /// <param name="gitDirPaths"><see cref="List{T}"/> of <see cref="String"/> representing the absolute path to all git directories to consider. (Positionally organized)</param>
+        /// <param name="commitIdsRef"><see cref="List{T}"/> of <see cref="String"/> representing the commits' id we want to compare to. (Positionally organized)</param>
+        /// <param name="commitIds"><see cref="List{T}"/> of <see cref="String"/> representing the commits' id we want to compare. (Positionally organized)</param>
+        /// <param name="buildModes"><see cref="List{T}"/> of <see cref="BuildType"/> to use for when managing versions. (Positionally organized)</param>
+        /// <param name="digitModes"><see cref="List{T}"/> of <see cref="DigitType"/> to modify when managing versions. (Positionally organized)</param>
+        public UVMConfiguration(List<String> gitDirPaths, List<String> commitIdsRef, List<String> commitIds, List<BuildType> buildModes, List<DigitType> digitModes)
         {
             GitDirectories = gitDirPaths;
             CommitIdsRef = commitIdsRef;
@@ -46,97 +60,28 @@ namespace UVM.Service
             DigitModes = digitModes;
         }
 
-        #endregion Constructor
-
-        #region Properties
-
-        /// <summary>
-        /// String representation of the absolute path to the git Directory to consider when running UVM. (Positionnaly organized)
-        /// </summary>
-        public List<string> GitDirectories { get; private set; } = [];
-
-        /// <summary>
-        /// String representation of the commit Id we want to compare. (Positionnaly organized)
-        /// </summary>
-        public List<string> CommitIds { get; private set; } = [];
-
-        /// <summary>
-        /// String representation of the commit Id we want to compare to. (Positionnaly organized)
-        /// </summary>
-        public List<string> CommitIdsRef { get; private set; } = [];
-
-        /// <summary>
-        /// List of <see cref="BuildType"/> used to manage the project. (Positionnaly organized)
-        /// </summary>
-        public List<BuildType> BuildModes { get; private set; } = [];
-
-        /// <summary>
-        /// List of <see cref="DigitType"/> to modify when managing the project. (Positionnaly organized)
-        /// </summary>
-        public List<DigitType> DigitModes { get; private set; } = [];
-
-        #endregion Properties
-
-        #region Method
-        // TBD
-        #endregion Method
-
-        #region Function
-        // TBD
-        #endregion Function
-
-        #region Field
-        // TBD
-        #endregion Field
-
         #endregion Public
 
         #region Protected
-
-        #region Constructor
         // TBD
-        #endregion Constructor
-
-        #region Properties
-        // TBD
-        #endregion Properties
-
-        #region Method
-        // TBD
-        #endregion Method
-
-        #region Function
-        // TBD
-        #endregion Function
-
-        #region Field
-        // TBD
-        #endregion Field
-
         #endregion Protected
 
         #region Private
-
-        #region Constructor
         // TBD
-        #endregion Constructor
-
-        #region Properties
-        // TBD
-        #endregion Properties
-
-        #region Method
-        // TBD
-        #endregion Method
-
-        #region Function
-        // TBD
-        #endregion Function
-
-        #region Field
-        // TBD
-        #endregion Field
-
         #endregion Private
+
+        #region DEBUG
+
+        /// <summary>
+        /// <see cref="String"> representation of the assembly.
+        /// </summary>
+        // private static String _asmName = Assembly.GetExecutingAssembly().GetName().Name ?? String.Empty;
+
+        /// <summary>
+        /// <see cref="String"> representation of the class.
+        /// </summary>
+        // private static String _className = nameof(UVMConfiguration);
+
+        #endregion DEBUG
     }
 }

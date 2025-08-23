@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Microsoft.Extensions.Logging;
 using UVM.Interface;
+using UVM.Interface.Interfaces;
 
 namespace UVM.Logging
 {
@@ -13,40 +15,26 @@ namespace UVM.Logging
     /// </summary>
     public sealed class UVMLogger
     {
-        #region DEBUG
-
-        /// <summary>
-        /// String representation of the assembly.
-        /// </summary>
-        private const string _asmName = "UVM.Logging";
-
-        /// <summary>
-        /// String representation of the class.
-        /// </summary>
-        private const string _className = "UVMLogger";
-
-        #endregion DEBUG
-
-        #region Singleton 
+        #region Singleton
 
         /// <summary>
         /// (Lazy) Private instance of the logger.
         /// </summary>
-        private static readonly Lazy<UVMLogger> lazy = new Lazy<UVMLogger>(() => new UVMLogger());
+        private static readonly Lazy<UVMLogger> _lazyInstance = new Lazy<UVMLogger>(() => new UVMLogger());
 
         /// <summary>
         /// Singleton access properties.
         /// </summary>
-        public static UVMLogger Instance { get { return lazy.Value; } }
+        public static UVMLogger Instance { get { return _lazyInstance.Value; } }
 
         /// <summary>
         /// Private constructor for Singleton instantiation.
         /// </summary>
         private UVMLogger()
         {
-            if (Directory.Exists(UVMConstante.UVM_LOG_FOLDER_PATH) is false)
+            if (Directory.Exists(UVMConstant.UVM_LOG_FOLDER_PATH) is false)
             {
-                Directory.CreateDirectory(UVMConstante.UVM_LOG_FOLDER_PATH);
+                Directory.CreateDirectory(UVMConstant.UVM_LOG_FOLDER_PATH);
             }
 
         }
@@ -55,33 +43,19 @@ namespace UVM.Logging
 
         #region Public
 
-        #region Constructor
-        // TBD
-        #endregion Constructor
-
-        #region Properties
+        /// <summary>
+        /// <see cref="List{T}"/> of all registered <see cref="UVMLog"/>.
+        /// </summary>
+        public List<UVMLog> Logs = [];
 
         /// <summary>
-        /// List of all registered logs.
+        /// Create a formatted title using a assembly name, class name and function/method name.
         /// </summary>
-        public List<UVMLog> Logs = new List<UVMLog>();
-
-        #endregion Properties
-
-        #region Method
-        // TBD
-        #endregion Method
-
-        #region Function
-
-        /// <summary>
-        /// Create a formated title using a assembly name, class name and function/method name.
-        /// </summary>
-        /// <param name="asmName">String representation of the assembly name to put in the title.</param>
-        /// <param name="className">String representation of the class name to put in the title.</param>
-        /// <param name="callerName">String representation of the function/method name to put in the title.</param>
-        /// <returns>A formated title for logging.</returns>
-        public static string CreateTitle(string asmName, string className, string callerName)
+        /// <param name="asmName"><see cref="String"/> representation of the assembly name to put in the title.</param>
+        /// <param name="className"><see cref="String"/> representation of the class name to put in the title.</param>
+        /// <param name="callerName"><see cref="String"/> representation of the function/method name to put in the title.</param>
+        /// <returns>A formatted title for logging.</returns>
+        public static string CreateTitle(String asmName, String className, String callerName)
         {
             return $"{asmName} | {className} | {callerName}";
         }
@@ -89,133 +63,98 @@ namespace UVM.Logging
         /// <summary>
         /// Add a log to the log list.
         /// </summary>
-        /// <param name="level">Loglevel to apply to the log.</param>
-        /// <param name="title">String representation of the log title.</param>
-        /// <param name="message">String representation of the log message.</param>
-        public static void AddLog(LogLevel level, string title, string message)
+        /// <param name="level"><see cref="String"/> to apply to the log.</param>
+        /// <param name="title"><see cref="String"/> representation of the log title.</param>
+        /// <param name="message"><see cref="String"/> representation of the log message.</param>
+        public static void AddLog(LogLevel level, String title, String message)
         {
             UVMLog newLog = new(level, title, message);
             Instance.Logs.Add(newLog);
         }
 
         /// <summary>
-        /// Add a log for a list of IGenerableFile.
+        /// Add a log for a list of messages.
         /// </summary>
-        /// <param name="level">Loglevel to apply to the log.</param>
-        /// <param name="title">String representation of the log title.</param>
-        /// <param name="preface">String representation of a small message to preface the log.</param>
-        /// <param name="messageList">List of string to log.</param>
-        public static void AddLogList(LogLevel level, string title, string preface, List<string> messageList)
+        /// <param name="level"><see cref="LogLevel"/> to apply to the log.</param>
+        /// <param name="title"><see cref="String"/> representation of the log title.</param>
+        /// <param name="preface"><see cref="String"/> representation of a small message to preface the log.</param>
+        /// <param name="messageList"><see cref="List{T}"/> of <see cref="String"/> to log.</param>
+        public static void AddLogList(LogLevel level, String title, String preface, List<string> messageList)
         {
-            string listOut = string.Empty;
-            foreach (string str in messageList)
+            String listOut = String.Empty;
+            foreach (String str in messageList)
             {
                 listOut += $"- {str}\n";
             }
 
-            string log = $"{preface} :\n{listOut}";
+            String log = $"{preface} :\n{listOut}";
             AddLog(level, title, log);
         }
 
         /// <summary>
-        /// Add a log for a list of IGenerableFile.
+        /// Add a log for a list of <see cref="I_VersionableFile">.
         /// </summary>
-        /// <param name="level">Loglevel to apply to the log.</param>
-        /// <param name="title">String representation of the log title.</param>
-        /// <param name="preface">String representation of a small message to preface the log.</param>
-        /// <param name="vfs">List of <see cref="I_VersionnableFile"/> to log.</param>
-        public static void AddLogListVF(LogLevel level, string title, string preface, List<I_VersionnableFile> vfs)
+        /// <param name="level"><see cref="LogLevel"/> to apply to the log.</param>
+        /// <param name="title"><see cref="String"/> representation of the log title.</param>
+        /// <param name="preface"><see cref="String"/> representation of a small message to preface the log.</param>
+        /// <param name="vfs"><see cref="List{T}"/> of <see cref="I_VersionableFile"/> to log.</param>
+        public static void AddLogListVF(LogLevel level, String title, String preface, List<I_VersionableFile> vfs)
         {
-            List<string> vfPaths = vfs.Select(vf => vf.VFPath).ToList();
+            List<String> vfPaths = vfs.Select(vf => vf.VFPath).ToList();
             AddLogList(level, title, preface, vfPaths);
         }
 
         /// <summary>
         // Dump all logs to a given directory applying a filter.
         // </summary>
-        /// <param name="outputPath">String representation of the absolute path to the direcotry to dump logs to.</param>
+        /// <param name="outputPath"><see cref="String"/> representation of the absolute path to the directory to dump logs to.</param>
         /// <param name="filter">Filter to apply to the logs. Any logs having a loglevel lower won't appear in the logs.</param>
-        public static void DumpLogs(string outputPath, LogLevel levelFilter)
+        public static void DumpLogs(String outputPath, LogLevel filter)
         {
-            string d = DateTime.Now.ToString("d");
-            string t = DateTime.Now.ToString("t");
-            string logName = $"{d.Replace("/", "-")}_{t.Replace(":", "-")}.log";
-            string logPath = Path.Combine(outputPath, logName);
+            String d = DateTime.Now.ToString("d");
+            String t = DateTime.Now.ToString("t");
+            String logName = $"{d.Replace("/", "-")}_{t.Replace(":", "-")}.log";
+            String logPath = Path.Combine(outputPath, logName);
 
-            List<UVMLog> logs = Instance.Logs.Where(log => log.Level >= levelFilter).ToList();
+            List<UVMLog> logs = Instance.Logs.Where(log => log.Level >= filter).ToList();
             StringBuilder stringBuilder = new StringBuilder();
             foreach (UVMLog log in logs)
             {
-                string header = $"{log.Date} | {log.Time} | {log.Level} | {log.Title} :";
+                String header = $"{log.Date} | {log.Time} | {log.Level} | {log.Title} :";
                 stringBuilder.AppendLine($"{header}\n{log.Message}\n");
             }
 
-            FileStream Fs = File.Create(logPath);
-            string logString = stringBuilder.ToString();
-            byte[] info = new UTF8Encoding(true).GetBytes(logString);
-            Fs.Write(info, 0, info.Length);
-            Fs.Close();
+            FileStream fileStream = File.Create(logPath);
+            String logString = stringBuilder.ToString();
+            Byte[] info = new UTF8Encoding(true).GetBytes(logString);
+            fileStream.Write(info, 0, info.Length);
+            fileStream.Close();
 
             Instance.Logs.Clear();
         }
 
-        #endregion Function
-
-        #region Field
-        // TBD
-        #endregion Field
-
         #endregion Public
 
         #region Protected
-
-        #region Constructor
         // TBD
-        #endregion Constructor
-
-        #region Properties
-        // TBD
-        #endregion Properties
-
-        #region Method
-        // TBD
-        #endregion Method
-
-        #region Function
-        // TBD
-        #endregion Function
-
-        #region Field
-        // TBD
-        #endregion Field
-
         #endregion Protected
 
         #region Private
-
-        #region Constructor
         // TBD
-        #endregion Constructor
-
-        #region Properties
-        // TBD
-        #endregion Properties
-
-        #region Method
-        // TBD
-        #endregion Method
-
-        #region Function
-        // TBD
-        #endregion Function
-
-        #region Field
-        // TBD
-        #endregion Field
-
         #endregion Private
 
+        #region DEBUG
+
+        /// <summary>
+        /// <see cref="String"> representation of the assembly.
+        /// </summary>
+        // private static String _asmName = Assembly.GetExecutingAssembly().GetName().Name ?? String.Empty;
+
+        /// <summary>
+        /// <see cref="String"> representation of the class.
+        /// </summary>
+        // private static String _className = nameof(UVMLogger);
+
+        #endregion DEBUG
     }
 }
-
-

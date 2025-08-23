@@ -1,52 +1,33 @@
+using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Microsoft.Extensions.Logging;
-using UVM.Interface;
+using UVM.Interface.Interfaces;
 using UVM.Logging;
 
 namespace UVM.Engine
 {
+    /// <summary>
+    /// Library for <see cref="I_VersionableFile"> dumping.
+    /// </summary>
     public class UVMWriter
     {
-        #region DEBUG
-
-        /// <summary>
-        /// String representation of the assembly.
-        /// </summary>
-        private const string _asmName = "UVM.Engine";
-
-        /// <summary>
-        /// String representation of the class.
-        /// </summary>
-        private const string _className = "UVMWriter";
-
-        #endregion DEBUG
+        #region Singleton
+        // TBD
+        #endregion Singleton
 
         #region Public
 
-        #region Constructor
-        // TBD
-        #endregion Constructor
-
-        #region Properties
-        // TBD
-        #endregion Properties
-
-        #region Method
-        // TBD
-        #endregion Method
-
-        #region Function
-
         /// <summary>
-        /// Dump the VersionnableFile to the filesystem at the given path.
+        /// Dump the <see cref="I_VersionableFile"> to the filesystem at the given path.
         /// </summary>
-        /// <param name="vfToDump">VersionnableFile to dump to the filesystem.</param>
-        /// <param name="outputPath">String representation of the absolute path to use, for file dumping.</param>
-        /// <returns>true => dumped successed, false => otherwise.</returns>
-        public static bool DumpFile(I_VersionnableFile vfToDump, string outputPath)
+        /// <param name="vfToDump"><see cref="I_VersionableFile"> to dump to the filesystem.</param>
+        /// <param name="outputPath"><see cref="String"> representation of the absolute path to use, for file dumping.</param>
+        /// <returns><see langword="true"/> => dumped succeed, <see langword="false"/> => otherwise.</returns>
+        public static Boolean DumpFile(I_VersionableFile vfToDump, String outputPath)
         {
-            string title = UVMLogger.CreateTitle(_asmName, _className, $"Dump");
-            string message = $"Dumping file {vfToDump.VFName} to {outputPath}.";
+            String title = UVMLogger.CreateTitle(_asmName, _className, $"{nameof(DumpFile)}");
+            String message = $"Dumping file {vfToDump.VFName} to {outputPath}.";
             UVMLogger.AddLog(LogLevel.Information, title, message);
 
             vfToDump.DumpFile(outputPath);
@@ -54,113 +35,87 @@ namespace UVM.Engine
         }
 
         /// <summary>
-        /// Dump a list of VersionnableFile to the filesystem at the given paths.
+        /// Dump a <see cref="List{T}"> of <see cref="I_VersionableFile"> to the filesystem at the given paths.
         /// </summary>
-        /// <param name="vfsToDump">List of VersionnableFile to dump to the filesystem.</param>
-        /// <param name="outputPaths">List of String representation of the absolute path to use, for file dumping.</param>
-        /// <returns>true => all dump successed, false => otherwise.</returns>
-        public static bool DumpFiles(List<I_VersionnableFile> vfsToDump, List<string> outputPaths)
+        /// <param name="vfsToDump"><see cref="List{T}"> of <see cref="I_VersionableFile"> to dump to the filesystem.</param>
+        /// <param name="outputPaths"><see cref="List{T}"> of <see cref="String"> representation of the absolute path to use, for file dumping.</param>
+        /// <returns><see langword="true"/> => dumped succeed, <see langword="false"/> => otherwise.</returns>
+        public static Boolean DumpFiles(List<I_VersionableFile> vfsToDump, List<string> outputPaths)
         {
             if (vfsToDump.Count != outputPaths.Count)
             {
-                string title = UVMLogger.CreateTitle(_asmName, _className, $"Dump");
-                string message = $"filesToDump and pathsToDump must be the same size.";
+                String title = UVMLogger.CreateTitle(_asmName, _className, $"{nameof(DumpFile)}");
+                String message = $"filesToDump and pathsToDump must be the same size.";
                 UVMLogger.AddLog(LogLevel.Error, title, message);
                 return false;
             }
 
+            Boolean success = true;
             for (int i = 0; i < vfsToDump.Count; i++)
             {
-                I_VersionnableFile fileToDump = vfsToDump[i];
-                string pathToDump = outputPaths[i];
+                I_VersionableFile fileToDump = vfsToDump[i];
+                String pathToDump = outputPaths[i];
 
-                DumpFile(fileToDump, pathToDump);
+                if (DumpFile(fileToDump, pathToDump) is false)
+                {
+                    success = false;
+                }
+
             }
-            return true;
+            return success;
         }
 
         /// <summary>
-        /// Dump a list of list of VersionnableFile to the filesystem at the given paths.
+        /// Dump a <see cref="List{T}"> of <see cref="List{T}"> of <see cref="I_VersionableFile"> to the filesystem at the given paths.
         /// </summary>
-        /// <param name="vfsToDump">List of List of VersionnableFile to dump to the filesystem.</param>
-        /// <param name="outputPaths">List of List of String representation of the absolute path to use, for file dumping.</param>
-        /// <returns>true => all dump successed, false => otherwise.</returns>
-        public static bool DumpFiles(List<List<I_VersionnableFile>> vfsToDump, List<List<string>> outputPaths)
+        /// <param name="vfsToDump"><see cref="List{T}"> of <see cref="List{T}"> of <see cref="I_VersionableFile"> to dump to the filesystem.</param>
+        /// <param name="outputPaths"><see cref="List{T}"> of <see cref="List{T}"> of <see cref="String"> representation of the absolute path to use, for file dumping.</param>
+        /// <returns><see langword="true"/> => dumped succeed, <see langword="false"/> => otherwise.</returns>
+        public static Boolean DumpFiles(List<List<I_VersionableFile>> vfsToDump, List<List<string>> outputPaths)
         {
             if (vfsToDump.Count != outputPaths.Count)
             {
-                string title = UVMLogger.CreateTitle(_asmName, _className, $"Dump");
-                string message = $"filesToDump and pathsToDump must be the same size.";
+                String title = UVMLogger.CreateTitle(_asmName, _className, $"{nameof(DumpFile)}");
+                String message = $"filesToDump and pathsToDump must be the same size.";
                 UVMLogger.AddLog(LogLevel.Error, title, message);
                 return false;
             }
 
+            Boolean success = true;
             for (int i = 0; i < vfsToDump.Count; i++)
             {
-                List<I_VersionnableFile> filesToDumpSub = vfsToDump[i];
-                List<string> pathsToDumpSub = outputPaths[i];
-
-                DumpFiles(filesToDumpSub, pathsToDumpSub);
+                List<I_VersionableFile> filesToDumpSub = vfsToDump[i];
+                List<String> pathsToDumpSub = outputPaths[i];
+                if (DumpFiles(filesToDumpSub, pathsToDumpSub) is false)
+                {
+                    success = false;
+                }
             }
-            return true;
+            return success;
         }
-
-        #endregion Function
-
-        #region Field
-        // TBD
-        #endregion Field
 
         #endregion Public
 
         #region Protected
-
-        #region Constructor
         // TBD
-        #endregion Constructor
-
-        #region Properties
-        // TBD
-        #endregion Properties
-
-        #region Method
-        // TBD
-        #endregion Method
-
-        #region Function
-        // TBD
-        #endregion Function
-
-        #region Field
-        // TBD
-        #endregion Field
-
         #endregion Protected
 
         #region Private
-
-        #region Constructor
         // TBD
-        #endregion Constructor
-
-        #region Properties
-        // TBD
-        #endregion Properties
-
-        #region Method
-        // TBD
-        #endregion Method
-
-        #region Function
-        // TBD
-        #endregion Function
-
-        #region Field
-        // TBD
-        #endregion Field
-
         #endregion Private
+
+        #region DEBUG
+
+        /// <summary>
+        /// <see cref="String"> representation of the assembly.
+        /// </summary>
+        private static String _asmName = Assembly.GetExecutingAssembly().GetName().Name ?? String.Empty;
+
+        /// <summary>
+        /// <see cref="String"> representation of the class.
+        /// </summary>
+        private static String _className = nameof(UVMWriter);
+
+        #endregion DEBUG
     }
 }
-
-

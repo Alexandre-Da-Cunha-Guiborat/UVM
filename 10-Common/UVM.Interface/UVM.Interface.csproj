@@ -1,23 +1,62 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <!-- ================================================== -->
+  <!-- ========== Project Information ========== -->
+  <!-- ================================================== -->
+  <PropertyGroup>
+    <Authors>Alexandre DA CUNHA--GUIBORAT</Authors>
+    <Company>TBD</Company>
+  </PropertyGroup>
+  <!-- ================================================== -->
+  <!-- ========== Assembly Information ========== -->
+  <!-- ================================================== -->
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
-
-    <PackageId>UVM.Interface</PackageId>
-    <VersionPrefix>1.0.0</VersionPrefix>
-    <Authors>Alexandre DA CUNHA--GUIBORAT</Authors>
-    <Company>TBD</Company>
-    <Description>A package with interfaces, enumerations and constantes used by UVM.</Description>
-
-    <IsNuGet>true</IsNuGet>
+    <Configurations>Debug;Release;DebugProject</Configurations>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
-
+  <!-- ================================================== -->
+  <!-- ========== Package Information ========== -->
+  <!-- ================================================== -->
+  <PropertyGroup>
+    <IsNuGet>true</IsNuGet>
+    <PackageId>UVM.Interface</PackageId>
+    <VersionPrefix>2.0.0</VersionPrefix>
+    <VersionSuffix></VersionSuffix>
+    <Description>A package with interfaces, enumerations and constants used by UVM.</Description>
+  </PropertyGroup>
+  <!-- ================================================== -->
+  <!-- ========== ThirdParty Dependencies ========== -->
+  <!-- ================================================== -->
   <ItemGroup>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>UVM.Testing</_Parameter1>
-    </AssemblyAttribute>
+  </ItemGroup>
+  <!-- ================================================== -->
+  <!-- ========== Release Dependencies ========== -->
+  <!-- ================================================== -->
+  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
   </ItemGroup>
 
+  <!-- ================================================== -->
+  <!-- ========== Debug Dependencies ========== -->
+  <!-- ================================================== -->
+  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  </ItemGroup>
+
+  <!-- ================================================== -->
+  <!-- ========== DebugProject Dependencies ========== -->
+  <!-- ================================================== -->
+  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugProject|AnyCPU' ">
+  </ItemGroup>
+  <!-- ================================================== -->
+  <!-- ========== Misc. ========== -->
+  <!-- ================================================== -->
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>UVM.Interface.Testing</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+  <!-- ================================================== -->
+  <!-- ========== Build Event. ========== -->
+  <!-- ================================================== -->
 </Project>

@@ -1,0 +1,68 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<!-- ================================================== -->
+	<!-- ========== Project Information ========== -->
+	<!-- ================================================== -->
+	<PropertyGroup>
+		<Authors>Alexandre DA CUNHA--GUIBORAT</Authors>
+		<Company>TBD</Company>
+	</PropertyGroup>
+	<!-- ================================================== -->
+	<!-- ========== Assembly Information ========== -->
+	<!-- ================================================== -->
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Configurations>Debug;Release;DebugProject</Configurations>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+		<IsPackable>false</IsPackable>
+		<IsTestProject>true</IsTestProject>
+	</PropertyGroup>
+	<!-- ================================================== -->
+	<!-- ========== Package Information ========== -->
+	<!-- ================================================== -->
+	<PropertyGroup>
+		<IsNuGet>false</IsNuGet>
+		<PackageId>UVM.Logging.Testing</PackageId>
+		<VersionPrefix>1.0.0</VersionPrefix>
+		<VersionSuffix></VersionSuffix>
+		<Description>A testing suit for UVM.Logging.</Description>
+	</PropertyGroup>
+	<!-- ================================================== -->
+	<!-- ========== ThirdParty Dependencies ========== -->
+	<!-- ================================================== -->
+	<ItemGroup>
+		<PackageReference Include="coverlet.collector" Version="6.0.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+		<PackageReference Include="xunit" Version="2.5.3" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
+	</ItemGroup>
+	<!-- ================================================== -->
+	<!-- ========== Release Dependencies ========== -->
+	<!-- ================================================== -->
+	<ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<PackageReference Include="UVM.Logging" Version="1.0.0" />
+	</ItemGroup>
+
+	<!-- ================================================== -->
+	<!-- ========== Debug Dependencies ========== -->
+	<!-- ================================================== -->
+	<ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<PackageReference Include="UVM.Logging" Version="1.0.0-DEBUG" />
+	</ItemGroup>
+
+	<!-- ================================================== -->
+	<!-- ========== DebugProject Dependencies ========== -->
+	<!-- ================================================== -->
+	<ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugProject|AnyCPU' ">
+		<ProjectReference Include="..\..\..\..\10-Common\UVM.Logging\UVM.Logging.csproj" />
+	</ItemGroup>
+	<!-- ================================================== -->
+	<!-- ========== Misc. ========== -->
+	<!-- ================================================== -->
+	<!-- ================================================== -->
+	<!-- ========== Build Event. ========== -->
+	<!-- ================================================== -->
+</Project>

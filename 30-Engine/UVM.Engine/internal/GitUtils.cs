@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using LibGit2Sharp;
 using UVM.Logging;
 
@@ -12,31 +14,11 @@ namespace UVM.Engine
     /// </summary>
     internal static class GitUtils
     {
-        #region DEBUG
-
-        /// <summary>
-        /// String representation of the assembly.
-        /// </summary>
-        private const string _asmName = "UVM.Engine";
-
-        /// <summary>
-        /// String representation of the class.
-        /// </summary>
-        private const string _className = "GitUtils";
-
-        #endregion DEBUG
+        #region Singleton
+        // TBD
+        #endregion Singleton
 
         #region Public
-
-        #region Properties
-        // TBD
-        #endregion Properties
-
-        #region Method
-        // TBD
-        #endregion Method
-
-        #region Function
 
         /// <summary>Compute the list of all modified files since a given commit in the given git directory.</summary>
         /// <param name="gitDirPath">String representation of the absolute path to the git directory.</param>
@@ -69,53 +51,33 @@ namespace UVM.Engine
             return [];
         }
 
-        #endregion Function
-
-        #region Field
-        // TBD
-        #endregion Field
-
         #endregion Public
 
         #region Protected
-
-        #region Properties
         // TBD
-        #endregion Properties
-
-        #region Method
-        // TBD
-        #endregion Method
-
-        #region Function
-        // TBD
-        #endregion Function
-
-        #region Field
-        // TBD
-        #endregion Field
-
         #endregion Protected
 
         #region Private
-
-        #region Properties
         // TBD
-        #endregion Properties
-
-        #region Method
-        // TBD
-        #endregion Method
-
-        #region Function
-        // TBD
-        #endregion Function
-
-        #region Field
-        // TBD
-        #endregion Field
-
         #endregion Private
+
+        #region DEBUG
+        // TBD
+        #endregion DEBUG
+
+        #region DEBUG
+
+        /// <summary>
+        /// <see cref="String"> representation of the assembly.
+        /// </summary>
+        private static String _asmName = Assembly.GetExecutingAssembly().GetName().Name ?? String.Empty;
+
+        /// <summary>
+        /// <see cref="String"> representation of the class.
+        /// </summary>
+        private static String _className = nameof(GitUtils);
+
+        #endregion DEBUG
     }
 }
 

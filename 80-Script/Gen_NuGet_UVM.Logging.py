@@ -5,8 +5,8 @@ import sys
 CMD_CLEAN_DEBUG = "dotnet clean --configuration Debug"
 CMD_CLEAN_RELEASE = "dotnet clean --configuration Release"
 CMD_RESTORE = "dotnet restore --configfile"
-CMD_BUILD_DEBUG = "dotnet build --configuration Debug "
-CMD_BUILD_RELEASE = "dotnet build --configuration Release "
+CMD_BUILD_DEBUG = "dotnet build --configuration Debug"
+CMD_BUILD_RELEASE = "dotnet build --configuration Release"
 CMD_PACK_DEBUG = "dotnet pack --configuration Debug --include-symbols --version-suffix \"DEBUG\""
 CMD_PACK_RELEASE = "dotnet pack --configuration Release"
 
