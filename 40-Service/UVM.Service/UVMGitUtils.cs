@@ -135,7 +135,7 @@ namespace UVM.Service
         /// <param name="gitDirPaths"><see cref="List{T}"/> of <see cref="String"/> representing the absolute path to a git directory.</param>
         /// <param name="commitIdRefs"><see cref="List{T}"/> of <see cref="String"/> representing the commit Id we want to compare to.</param>
         /// <param name="commitIds"><see cref="List{T}"/> of <see cref="String"/> representing the commitId we want to compare.</param>
-        /// <param name="fExtensions"><see cref="List{T}"/> of <see cref="String"/> representing the extensions to look for modified files.</param>
+        /// <param name="fExtensions"><see cref="List{T}"/> of <see cref="String"/> representing the extensions to look for modified files. (if empty, will consider all modifies extensions.)</param>
         /// <returns>A <see cref="List{T}"/> of reference to <see cref="I_VersionableFile"> that have a file that has been modified.</returns>
         public static List<I_VersionableFile> ComputeVFWithModifiedFiles(
             List<I_VersionableFile> vfPool,
@@ -149,11 +149,21 @@ namespace UVM.Service
 
             // Compute all modified files matching extensions with one of the extensions given in parameter.
             List<String> modifiedFilesExts = [];
-            foreach (String fExt in fExtensions)
+
+            // Check for extensions, if none, we consider all modified files.
+            if (fExtensions.Any())
             {
-                List<String> modifiedFilesExt = modifiedFiles.Where(f => Path.GetExtension(f) == fExt).ToList();
-                modifiedFilesExts = modifiedFilesExts.Concat(modifiedFilesExt).ToList();
+                foreach (String fExt in fExtensions)
+                {
+                    List<String> modifiedFilesExt = modifiedFiles.Where(f => Path.GetExtension(f) == fExt).ToList();
+                    modifiedFilesExts = modifiedFilesExts.Concat(modifiedFilesExt).ToList();
+                }
             }
+            else
+            {
+                modifiedFilesExts = modifiedFiles;
+            }
+
 
             // Compute the list of all VersionableFile, having a modified file within its children folders.
             List<I_VersionableFile> vfToUpdate = [];
@@ -220,7 +230,7 @@ namespace UVM.Service
         /// <param name="gitDirPaths"><see cref="List{T}"/> of <see cref="String"/> representing the absolute path to a git directory.</param>
         /// <param name="commitIdRefs"><see cref="List{T}"/> of <see cref="String"/> representing the commit Id we want to compare to.</param>
         /// <param name="commitIds"><see cref="List{T}"/> of <see cref="String"/> representing the commitId we want to compare.</param>
-        /// <param name="fExtensions"><see cref="List{T}"/> of <see cref="String"/> representing the extensions to look for modified files.</param>
+        /// <param name="fExtensions"><see cref="List{T}"/> of <see cref="String"/> representing the extensions to look for modified files. (if empty, will consider all modifies extensions.)</param>
         /// <returns>A <see cref="List{T}"/> of reference to <see cref="I_VersionableFile"> needing to be updated.</returns>
         public static List<I_VersionableFile> ComputeModifiedVFAndVFWithModifiedFiles(
             List<I_VersionableFile> vfPool,
