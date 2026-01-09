@@ -1,0 +1,8 @@
+* text=auto
+
+*.jpg   binary
+*.png   binary
+*.gif   binary
+
+*.pdf   diff=astextplain
+*.PDF   diff=astextplain

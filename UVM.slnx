@@ -1,0 +1,59 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Release" />
+    <BuildType Name="Debug" />
+    <BuildType Name="DebugProject" />
+  </Configurations>
+  <Folder Name="/10-Common/">
+    <Project Path="10-Common/UVM.Interface/UVM.Interface.csproj" />
+    <Project Path="10-Common/UVM.Logging/UVM.Logging.csproj" />
+  </Folder>
+  <Folder Name="/20-Bll/">
+  </Folder>
+  <Folder Name="/30-Engine/">
+    <Project Path="30-Engine/UVM.Engine/UVM.Engine.csproj" />
+  </Folder>
+  <Folder Name="/40-Service/">
+    <Project Path="40-Service/UVM.Service/UVM.Service.csproj" />
+  </Folder>
+  <Folder Name="/50-App/">
+    <Project Path="50-App/UVM.SDK/UVM.SDK.csproj" />
+  </Folder>
+  <Folder Name="/60-Demo/">
+  </Folder>
+  <Folder Name="/70-Test/">
+  </Folder>
+  <Folder Name="/70-Test/Models/">
+    <Project Path="70-Test/Model/UVM.Testing.Model/UVM.Testing.Model.csproj" />
+  </Folder>
+  <Folder Name="/70-Test/UT/" />
+  <Folder Name="/70-Test/UT/10-Common/">
+    <Project Path="70-Test/UT/10-Common/UVM.Interface.Testing/UVM.Interface.Testing.csproj" />
+    <Project Path="70-Test/UT/10-Common/UVM.Logging.Testing/UVM.Logging.Testing.csproj" />
+  </Folder>
+  <Folder Name="/70-Test/UT/20-Bll/" />
+  <Folder Name="/70-Test/UT/30-Engine/">
+    <Project Path="70-Test/UT/30-Engine/UVM.Engine.Testing/UVM.Engine.Testing.csproj" />
+  </Folder>
+  <Folder Name="/70-Test/UT/40-Service/">
+    <Project Path="70-Test/UT/40-Service/UVM.Service.Testing/UVM.Service.Testing.csproj" />
+  </Folder>
+  <Folder Name="/70-Test/UT/50-App/">
+    <Project Path="70-Test/UT/50-App/UVM.SDK.Testing/UVM.SDK.Testing.csproj" />
+  </Folder>
+  <Folder Name="/80-Doc/">
+    <File Path="80-Doc/UML_UVM.drawio" />
+  </Folder>
+  <Folder Name="/90-Script/">
+    <File Path="90-Script/bin_obj_restore_script.py" />
+    <File Path="90-Script/Gen_NuGet_UVM.Interface.py" />
+    <File Path="90-Script/Gen_NuGet_UVM.Logging.py" />
+    <File Path="90-Script/Gen_NuGet_UVM.Engine.py" />
+    <File Path="90-Script/Gen_NuGet_UVM.Service.py" />
+    <File Path="90-Script/Gen_NuGet_UVM.SDK.py" />
+    <File Path="90-Script/Gen_NuGet_UVM.ALL.py" />
+  </Folder>
+  <Folder Name="/90-Script/utils/">
+    <File Path="90-Script/utils/Gen_NuGet_Utils.py" />
+  </Folder>
+</Solution>
