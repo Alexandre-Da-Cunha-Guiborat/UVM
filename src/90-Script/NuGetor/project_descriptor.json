@@ -1,0 +1,24 @@
+{
+  "ProjectDescriptions": [
+    {
+      "RelPathFromSln": "/10-Common/UVM.Interface/UVM.Interface.csproj",
+      "OrderNb": 101
+    },
+    {
+      "RelPathFromSln": "/10-Common/UVM.Logging/UVM.Logging.csproj",
+      "OrderNb": 201
+    },
+    {
+      "RelPathFromSln": "/30-Engine/UVM.Engine/UVM.Engine.csproj",
+      "OrderNb": 301
+    },
+    {
+      "RelPathFromSln": "/40-Service/UVM.Service/UVM.Service.csproj",
+      "OrderNb": 302
+    },
+    {
+      "RelPathFromSln": "/50-App/UVM.SDK/UVM.SDK.csproj",
+      "OrderNb": 401
+    }
+  ]
+}

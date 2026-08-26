@@ -1,0 +1,50 @@
+<Solution>
+    <Folder Name="/00-Solution/">
+        <File Path=".editorconfig" />
+        <File Path="Directory.Packages.props" />
+        <File Path="nuget.config" />
+    </Folder>
+    <Folder Name="/10-Common/">
+        <Project Path="src/10-Common/UVM.Interface/UVM.Interface.csproj" />
+        <Project Path="src/10-Common/UVM.Logging/UVM.Logging.csproj" />
+    </Folder>
+    <Folder Name="/20-Bll/">
+    </Folder>
+    <Folder Name="/30-Engine/">
+        <Project Path="src/30-Engine/UVM.Engine/UVM.Engine.csproj" />
+    </Folder>
+    <Folder Name="/40-Service/">
+        <Project Path="src/40-Service/UVM.Service/UVM.Service.csproj" />
+    </Folder>
+    <Folder Name="/50-App/">
+        <Project Path="src/50-App/UVM.SDK/UVM.SDK.csproj" />
+    </Folder>
+    <Folder Name="/60-Demo/">
+        <Project Path="src/60-Demo/UVM.TUI.Demo/UVM.TUI.Demo.csproj" />
+    </Folder>
+    <Folder Name="/70-Test/">
+        <Project Path="src/70-Test/UVM.Test.Mock/UVM.Test.Mock.csproj" />
+    </Folder>
+    <Folder Name="/70-Test/UT/" />
+    <Folder Name="/70-Test/UT/10-Common/">
+        <Project Path="src/70-Test/UT/10-Common/UVM.Interface.Test/UVM.Interface.Test.csproj" />
+        <Project Path="src/70-Test/UT/10-Common/UVM.Logging.Test/UVM.Logging.Test.csproj" />
+    </Folder>
+    <Folder Name="/70-Test/UT/30-Engine/">
+        <Project Path="src/70-Test/UT/30-Engine/UVM.Engine.Test/UVM.Engine.Test.csproj" />
+    </Folder>
+    <Folder Name="/70-Test/UT/40-Service/">
+        <Project Path="src/70-Test/UT/40-Service/UVM.Service.Test/UVM.Service.Test.csproj" />
+    </Folder>
+    <Folder Name="/70-Test/UT/50-App/">
+        <Project Path="src/70-Test/UT/50-App/UVM.SDK.Test/UVM.SDK.Test.csproj" />
+    </Folder>
+    <Folder Name="/80-Doc/" />
+    <Folder Name="/90-Script/">
+        <File Path="90-Script/package_project.bat" />
+    </Folder>
+    <Folder Name="/90-Script/NuGetor/">
+        <File Path="90-Script/NuGetor/NuGetor.CLI.exe" />
+        <File Path="90-Script/NuGetor/project_descriptor.json" />
+    </Folder>
+</Solution>

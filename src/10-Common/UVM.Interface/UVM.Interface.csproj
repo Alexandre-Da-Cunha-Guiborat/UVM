@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup Label="Project_Information">
+        <Authors>Alexandre DA CUNHA</Authors>
+        <Company>TBD</Company>
+    </PropertyGroup>
+
+    <PropertyGroup Label="Package_Information">
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Configurations>Release;Debug</Configurations>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    </PropertyGroup>
+
+    <PropertyGroup Label="Package_Information">
+        <IsPackable>true</IsPackable>
+        <PackageId>UVM.Interface</PackageId>
+        <Version>$(UVMVersion)</Version>
+        <Description>A package providing external users with a set of properties and functions to implement, enabling UVM to work with their project.</Description>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+    
+    <ItemGroup Label="Release_Dependencies" Condition="'$(Configuration)' == 'Release'"></ItemGroup>
+    <ItemGroup Label="Debug_Dependencies" Condition="'$(Configuration)' == 'Debug'"></ItemGroup>
+    
+    <ItemGroup Label="Misc">
+        <None Include="docs/README.md" Pack="true" PackagePath="/" />
+        
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+            <_Parameter1>UVM.Interface.Test</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+</Project>

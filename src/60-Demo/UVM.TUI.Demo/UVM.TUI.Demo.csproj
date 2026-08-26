@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup Label="Project_Information">
+        <Authors>Alexandre DA CUNHA</Authors>
+        <Company>TBD</Company>
+    </PropertyGroup>
+
+    <PropertyGroup Label="Package_Information">
+        <TargetFramework>net10.0</TargetFramework>
+        <OutputType>Exe</OutputType>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Configurations>Release;Debug</Configurations>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    </PropertyGroup>
+
+    <PropertyGroup Label="Package_Information">
+        <IsPackable>false</IsPackable>
+        <PackageId>UVM.TUI.Demo</PackageId>
+        <Version>$(UVMVersion)</Version>
+        <Description>Little demo for UVM usage on a TUI app.</Description>
+    </PropertyGroup>
+
+    <ItemGroup Label="ThirdParty_Dependencies">
+        <PackageReference Include="Spectre.Console" />
+    </ItemGroup>
+
+    <ItemGroup Label="Release_Dependencies" Condition="'$(Configuration)' == 'Release'">
+        <PackageReference Include="UVM.SDK" />
+    </ItemGroup>
+
+    <ItemGroup Label="Debug_Dependencies" Condition="'$(Configuration)' == 'Debug'">
+        <ProjectReference Include="..\..\30-Engine\UVM.Engine\UVM.Engine.csproj" />
+        <ProjectReference Include="..\..\40-Service\UVM.Service\UVM.Service.csproj" />
+    </ItemGroup>
+
+    <ItemGroup Label="Misc">
+    </ItemGroup>
+</Project>
