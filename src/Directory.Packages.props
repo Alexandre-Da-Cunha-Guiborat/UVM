@@ -1,0 +1,35 @@
+<Project>
+    <PropertyGroup Label="Package_Managing">
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+        <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+        <CentralPackageVersionOverrideEnabled>true</CentralPackageVersionOverrideEnabled>
+    </PropertyGroup>
+
+    <PropertyGroup Label="Package_Version">
+        <UVMVersionPrefix>0.1.0</UVMVersionPrefix>
+        <UVMVersionSuffix></UVMVersionSuffix>
+        <UVMVersion Condition="'$(UVMVersionSuffix)' == ''">$(UVMVersionPrefix)</UVMVersion>
+        <UVMVersion Condition="'$(UVMVersionSuffix)' != ''">$(UVMVersionPrefix)-$(UVMVersionSuffix)</UVMVersion>
+    </PropertyGroup>
+    
+    <ItemGroup Label="ThirdParty_Dependencies">
+        <PackageVersion Include="LibGit2Sharp" Version="0.31.0" />
+        <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.8" />
+        <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+        <PackageVersion Include="xunit" Version="2.9.3" />
+        <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
+        <PackageVersion Include="Spectre.Console" Version="0.56.0"/>
+    </ItemGroup>
+    
+    <ItemGroup Label="Release_Dependencies" Condition="'$(Configuration)' == 'Release'">
+        <PackageVersion Include="UVM.Interface" Version="$(UVMVersion)" />
+        <PackageVersion Include="UVM.Logging" Version="$(UVMVersion)" />
+        <PackageVersion Include="UVM.Engine" Version="$(UVMVersion)" />
+        <PackageVersion Include="UVM.Service" Version="$(UVMVersion)" />
+        <PackageVersion Include="UVM.SDK" Version="$(UVMVersion)" />
+    </ItemGroup>
+    
+    <ItemGroup Label="Debug_Dependencies" Condition="'$(Configuration)' == 'Debug'">
+    </ItemGroup>
+</Project>

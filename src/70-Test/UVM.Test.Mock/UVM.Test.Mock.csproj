@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup Label="Project_Information">
+        <Authors>Alexandre DA CUNHA</Authors>
+        <Company>TBD</Company>
+    </PropertyGroup>
+
+    <PropertyGroup Label="Assembly_Information">
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Configurations>Release;Debug</Configurations>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    </PropertyGroup>
+
+    <PropertyGroup Label="Package_Information">
+        <IsPackable>false</IsPackable>
+        <PackageId>UVM.Testing.Model</PackageId>
+        <VersionPrefix>$(UVMVersionPrefix)</VersionPrefix>
+        <VersionSuffix>$(UVMVersionSuffix)</VersionSuffix>
+        <Description>A mocked implementation of the interfaces for testing purpuses.</Description>
+    </PropertyGroup>
+
+    <ItemGroup Label="ThirdParty_Dependencies"></ItemGroup>
+
+    <ItemGroup Label="Release_Dependencies" Condition="'$(Configuration)' == 'Release'">
+        <PackageReference Include="UVM.Interface" />
+    </ItemGroup>
+
+    <ItemGroup Label="Debug_Dependencies" Condition="'$(Configuration)' == 'Debug'">
+        <ProjectReference Include="..\..\10-Common\UVM.Interface\UVM.Interface.csproj" />
+    </ItemGroup>
+
+    <ItemGroup Label="Misc"></ItemGroup>
+</Project>

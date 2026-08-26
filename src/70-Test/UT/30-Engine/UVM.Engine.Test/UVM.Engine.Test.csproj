@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup Label="Project_Information">
+		<Authors>Alexandre DA CUNHA</Authors>
+		<Company>TBD</Company>
+	</PropertyGroup>
+
+	<PropertyGroup Label="Assembly_Information">
+		<TargetFramework>net10.0</TargetFramework>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Configurations>Release;Debug</Configurations>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+	</PropertyGroup>
+
+	<PropertyGroup Label="Package_Information">
+		<IsPackable>false</IsPackable>
+		<PackageId>UVM.Engine.Testing</PackageId>
+        <VersionPrefix>$(UVMVersionPrefix)</VersionPrefix>
+        <VersionSuffix>$(UVMVersionSuffix)</VersionSuffix>
+		<Description>A testing suit for UVM.Engine.</Description>
+	</PropertyGroup>
+
+    <ItemGroup Label="ThirdParty_Dependencies">
+		<PackageReference Include="coverlet.collector" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" />
+		<PackageReference Include="xunit" />
+		<PackageReference Include="xunit.runner.visualstudio" />
+
+		<ProjectReference Include="..\..\..\UVM.Test.Mock\UVM.Test.Mock.csproj" />
+	</ItemGroup>
+
+	<ItemGroup Label="Release_Dependencies" Condition="'$(Configuration)' == 'Release'">
+		<PackageReference Include="UVM.Engine" />
+	</ItemGroup>
+
+	<ItemGroup Label="Debug_Dependencies" Condition="'$(Configuration)' == 'Debug'">
+		<ProjectReference Include="..\..\..\..\30-Engine\UVM.Engine\UVM.Engine.csproj" />
+	</ItemGroup>
+
+    <ItemGroup Label="Misc"></ItemGroup>
+</Project>
